@@ -1,0 +1,19 @@
+{
+  "name": "picross-phaser",
+  "version": "1.0.0",
+  "description": "Picross game created with the Phaser game framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Souzooka/Picross-Phaser.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Souzooka/Picross-Phaser/issues"
+  },
+  "homepage": "https://github.com/Souzooka/Picross-Phaser#readme"
+}
