@@ -39,17 +39,61 @@
 var game = new Phaser.Game(1280, 720, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
 function preload() {
-  game.load.image('sky', 'assets/sky.png');
-  game.load.image('ground', 'assets/platform.png');
-  game.load.image('star', 'assets/star.png');
+  game.load.image("background", 'assets/UI/background.png');
+  game.load.image('grey_arrowDownGrey', 'assets/UI/grey_arrowDownGrey.png');
+  game.load.image('grey_arrowUpGrey', 'assets/UI/grey_arrowUpGrey.png');
+  game.load.image('grey_box', 'assets/UI/grey_box.png');
+  game.load.image('grey_boxCheckmark', 'assets/UI/grey_boxCheckmark.png');
+  game.load.image('grey_boxCross', 'assets/UI/grey_boxCross.png');
+  game.load.image('grey_button00', 'assets/UI/grey_button00.png');
+  game.load.image('grey_button01', 'assets/UI/grey_button01.png');
+  game.load.image('grey_button02', 'assets/UI/grey_button02.png');
+  game.load.image('grey_button03', 'assets/UI/grey_button03.png');
+  game.load.image('grey_button04', 'assets/UI/grey_button04.png');
+  game.load.image('grey_button05', 'assets/UI/grey_button05.png');
+  game.load.image('grey_button06', 'assets/UI/grey_button06.png');
+  game.load.image('grey_button07', 'assets/UI/grey_button07.png');
+  game.load.image('grey_button08', 'assets/UI/grey_button08.png');
+  game.load.image('grey_button09', 'assets/UI/grey_button09.png');
+  game.load.image('grey_button10', 'assets/UI/grey_button10.png');
+  game.load.image('grey_button11', 'assets/UI/grey_button11.png');
+  game.load.image('grey_button12', 'assets/UI/grey_button12.png');
+  game.load.image('grey_button13', 'assets/UI/grey_button13.png');
+  game.load.image('grey_button14', 'assets/UI/grey_button14.png');
+  game.load.image('grey_button15', 'assets/UI/grey_button15.png');
+
   game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
 }
 
+var sprite;
+
 function create() {
-  game.add.sprite(0, 0, 'star');
+
+  game.add.tileSprite(0, 0, 1280, 720, "background");
+  sprite = game.add.sprite(200, 200, 'grey_button01');
+  sprite.inputEnabled = true;
+  sprite.input.useHandCursor = true;
+  sprite.events.onInputDown.add(depressedGreyButton01, this);
+
+}
+
+function depressedGreyButton01() {
+  sprite.loadTexture('grey_button02', 0);
+  sprite.events.onInputUp.add(normalGreyButton01, this);
+}
+
+function normalGreyButton01() {
+  sprite.loadTexture('grey_button01', 0);
+  sprite.events.onInputDown.add(depressedGreyButton01, this);
+}
+
+function render() {
+
 }
 
 function update() {
+
+
 }
 
 </script>
