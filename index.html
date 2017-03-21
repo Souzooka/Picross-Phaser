@@ -65,26 +65,29 @@ function preload() {
   game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
 }
 
-var sprite;
-
 function create() {
 
-  game.add.tileSprite(0, 0, 1280, 720, "background");
-  sprite = game.add.sprite(200, 200, 'grey_button01');
-  sprite.inputEnabled = true;
-  sprite.input.useHandCursor = true;
-  sprite.events.onInputDown.add(depressedGreyButton01, this);
+   game.add.tileSprite(0, 0, 1280, 720, "background");
 
-}
 
-function depressedGreyButton01() {
-  sprite.loadTexture('grey_button02', 0);
-  sprite.events.onInputUp.add(normalGreyButton01, this);
-}
+  function clickableSprite(x, y, main, alt) {
+      var sprite;
 
-function normalGreyButton01() {
-  sprite.loadTexture('grey_button01', 0);
-  sprite.events.onInputDown.add(depressedGreyButton01, this);
+      this.sprite = game.add.sprite(x, y, main);
+      sprite.inputEnabled = true;
+      sprite.input.useHandCursor = true;
+      
+      sprite.events.onInputDown.add(function() {
+        sprite.loadTexture(alt);
+        sprite.events.onInputUp.add(function() {
+          sprite.loadTexture(main);
+        });
+      }, this);
+
+  }
+
+  var sprite1 = new clickableSprite(200, 200, 'grey_button01', 'grey_button02');
+  var sprite2 = new clickableSprite(400, 200, 'grey_button01', 'grey_button02');
 }
 
 function render() {
