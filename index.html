@@ -4,14 +4,9 @@
   <meta charset="UTF-8" />
   <title>Picross</title>
   <script type="text/javascript" src="js/phaser.min.js"></script>
-    <style type="text/css">
-        body {
-            margin: 0;
-        }
-    </style>
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
-
 <script type="text/javascript">
 
 /*
@@ -38,8 +33,24 @@
 
 var game = new Phaser.Game(1280, 720, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
+WebFontConfig = {
+
+    //  'active' means all requested fonts have finished loading
+    //  We set a 1 second delay before calling 'createText'.
+    //  For some reason if we don't the browser cannot render the text the first time it's created.
+    active: function() { game.time.events.add(Phaser.Timer.SECOND, createText, this); },
+
+    //  The Google Fonts we want to load (specify as many as you like in the array)
+    google: {
+      families: ['Oswald']
+    }
+
+};
+
 function preload() {
-  game.load.image("background", 'assets/UI/background.png');
+
+  game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
+
   game.load.image('grey_arrowDownGrey', 'assets/UI/grey_arrowDownGrey.png');
   game.load.image('grey_arrowUpGrey', 'assets/UI/grey_arrowUpGrey.png');
   game.load.image('grey_box', 'assets/UI/grey_box.png');
@@ -67,7 +78,7 @@ function preload() {
 
 function create() {
 
-   game.add.tileSprite(0, 0, 1280, 720, "background");
+   game.stage.setBackgroundColor(0x8d8def);
 
 
   function clickableSprite(x, y, main, alt) {
@@ -80,7 +91,7 @@ function create() {
       this.sprite = game.add.sprite(x, y, main);
       this.sprite.inputEnabled = true;
       this.sprite.input.useHandCursor = true;
-      
+
       this.sprite.events.onInputDown.add(function() {
         this.sprite.loadTexture(alt);
         this.sprite.events.onInputUp.add(function() {
@@ -90,9 +101,13 @@ function create() {
 
   }
 
-  var sprite1 = new clickableSprite(200, 200, 'grey_button01', 'grey_button02');
-  var sprite2 = new clickableSprite(400, 200, 'grey_button01', 'grey_button02');
-  sprite1.getSprite().loadTexture('grey_button09');
+  var sprite1 = new clickableSprite(545, 600, 'grey_button01', 'grey_button02');
+  sprite1.getSprite().events.onInputUp.add(
+    function() {
+      document.getElementById("test").style.visibility = "hidden";
+      sprite1.getSprite().destroy();
+    }, this);
+
 }
 
 function render() {
