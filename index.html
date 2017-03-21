@@ -74,14 +74,14 @@ function create() {
       var sprite;
 
       this.sprite = game.add.sprite(x, y, main);
-      sprite.inputEnabled = true;
-      sprite.input.useHandCursor = true;
+      this.sprite.inputEnabled = true;
+      this.sprite.input.useHandCursor = true;
       
-      sprite.events.onInputDown.add(function() {
-        sprite.loadTexture(alt);
-        sprite.events.onInputUp.add(function() {
-          sprite.loadTexture(main);
-        });
+      this.sprite.events.onInputDown.add(function() {
+        this.sprite.loadTexture(alt);
+        this.sprite.events.onInputUp.add(function() {
+          this.sprite.loadTexture(main);
+        }, this);
       }, this);
 
   }
