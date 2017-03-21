@@ -73,6 +73,10 @@ function create() {
   function clickableSprite(x, y, main, alt) {
       var sprite;
 
+      this.getSprite = function() {
+        return this.sprite;
+      };
+
       this.sprite = game.add.sprite(x, y, main);
       this.sprite.inputEnabled = true;
       this.sprite.input.useHandCursor = true;
@@ -88,6 +92,7 @@ function create() {
 
   var sprite1 = new clickableSprite(200, 200, 'grey_button01', 'grey_button02');
   var sprite2 = new clickableSprite(400, 200, 'grey_button01', 'grey_button02');
+  sprite1.getSprite().loadTexture('grey_button09');
 }
 
 function render() {
